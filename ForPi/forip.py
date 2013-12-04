@@ -58,8 +58,12 @@ def FindVictim():
 
         possibleparts=[]
         targets=[]
-
-        for i in range(len(contours2)):
+        looplen=0
+        if len(contours2)> 5:
+            looplen=5
+        else:
+            looplen=len(contours2)
+        for i in range(looplen):
 
             cnt2=contours2[i]
             x,y,w,h = cv2.boundingRect(cnt2)
@@ -102,7 +106,8 @@ def FindVictim():
                         ratio=abs(float(xnew-wnew)/float(ynew-hnew))
                         if (ratio >0.2 and ratio <0.6):
                             cv2.rectangle(f,(xnew,ynew),(wnew,hnew),(0,255,0),2)  
-                            targets.append((xnew-wnew)/2) 
+                            targets.append((xnew-wnew)/2)
+        print 'targets found ', time.clock()
         if len(targets)>0:
             target=targets[0]
             DestroyVictims(target)
@@ -115,8 +120,7 @@ def DestroyVictims(target):
     if servo1pos < 0:
         servo1pos=0
     ServoBlaster.write('0=' + str(servo1pos) + '\n')
+    print 'Wrote to servo ', time.clock()
 
 FindVictim()
-
-
 
