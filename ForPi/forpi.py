@@ -42,10 +42,10 @@ def FindVictim():
         #blurredimg2=cv2.blur(diffmask2,(7,20))
         #blurredimg3=cv2.blur(diffmask3,(7,20))
         #print 'blurred  ', time.clock()
-        ret,mask2=cv2.threshold(blurredimg2,30, 255, cv2.THRESH_BINARY) #h=5 blurry h=20 or more crisp
+        ret,mask2=cv2.threshold(diffmask2,30, 255, cv2.THRESH_BINARY) #h=5 blurry h=20 or more crisp
 
-        ret,mask1=cv2.threshold(blurredimg1,hthresh, 255, cv2.THRESH_BINARY) #v=30
-        ret,mask3=cv2.threshold(blurredimg3,35, 255, cv2.THRESH_BINARY) #s=35
+        ret,mask1=cv2.threshold(diffmask1,hthresh, 255, cv2.THRESH_BINARY) #v=30
+        ret,mask3=cv2.threshold(diffmask3,35, 255, cv2.THRESH_BINARY) #s=35
 
         print 'masks made  ', time.clock()
         maska=cv2.add(mask1,mask2)
